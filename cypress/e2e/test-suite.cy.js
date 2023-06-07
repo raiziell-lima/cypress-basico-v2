@@ -138,5 +138,5 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('a[href="privacy.html"]').invoke('removeAttr', 'target').click()
   })
 
-  
+  teste
 })
