@@ -1,29 +1,28 @@
-# Testes automatizados com Cypress - Básico
+# cypress-basico-v2
 
-👋 Seja bem-vindo(a)!
+Sample Project for the basic course of the Talking About Testing online school.
 
-É muito bom tê-lo(a) aqui. Tenho certeza que você vai adorar este curso. ❤️
+...
+## Pre-requirements
 
-## O que você vai aprender
+It is required to have Node.js and npm installed to run this project.
 
-Durante o curso de testes automatizados com Cypress (básico), você vai aprender:
+> We've used versions `18.16.0` and `9.5.1` of noje.js and npm, respectively. We suggest you to use the same or later versions.
 
-- Como configurar um projeto Cypress do zero
-- Como visitar páginas locais e remotas
-- Como lidar com os elementos mais comuns encontrados em aplicações web
-- Como testar _upload_ de arquivos
-- Como realizar as mais diversas verificações de resultados esperados
-- Como criar comandos customizados
-- Como lidar com links que abrem em outra aba do navegador
-- Como rodar testes simulando as dimensões de um dispositivo móvel
-- Como resolver os mesmos problemas de diferentes formas, conhecendo a [API do Cypress](https://docs.cypress.io/api/table-of-contents)
-- Como executar os testes em um _pipeline_ de integração contínua sempre que mudanças ocorrerem no código da aplicação (ou dos testes)
-- Como criar uma documentação mínima para seu projeto de testes automatizados
+## Instalation
 
-## Vamos começar?
+Run `npm install` (or `npm i` for the short version ) to install the dev dependencies.
 
-Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
+## Tests 
 
-___
+Run `npx cypress open` to run the tests in headed mode. 
 
-Este é mais um curso da [**Escola Talking About Testing**](https://udemy.com/user/walmyr).
+Or, run `npx cypress run` to run the tests in headless mode.
+
+## Support this project
+
+If you want to support this project, leave a star.
+
+---
+
+This project was created by `Raiziell`.
