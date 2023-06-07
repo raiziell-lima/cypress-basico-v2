@@ -134,7 +134,7 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('a[href="privacy.html"]').should('have.attr', 'target', '_blank')
   })
 
-  it.only('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+  it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
     cy.get('a[href="privacy.html"]').invoke('removeAttr', 'target').click()
   })
 
