@@ -5,21 +5,29 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.visit('./src/index.html')
   })
 
-  it('Acesso à página', () => {
+  Cypress._.times(10, function(){
 
-    cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
+
+    it('Acesso à página', () => {
+
+      cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
+  
+    })
+
 
   })
 
-  it('Ex 0 - Preenche os campos obrigatórios e envia o formulário', () => {
 
+  it('Ex 0 - Preenche os campos obrigatórios e envia o formulário', () => {
+    cy.clock()
     cy.get('input#firstName').type('Raiziell')
     cy.get('input#lastName').type('Lima')
     cy.get('input#email').type('raiziellz@gmail.com')
     cy.get('textarea#open-text-area').type('Estou com problemas para abrir o Cypress')
-    //cy.get('button[type="submit"]').click()
     cy.contains('button', 'enviar', { matchCase: false }).click()
     cy.get('.success').should('be.visible')
+    cy.tick(4000)
+    cy.get('.success').should('not.be.visible')
     
   })
 
@@ -32,14 +40,17 @@ describe('Central de Atendimento ao Cliente', () => {
 
   it('Ex 2 - Exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
 
+    cy.clock()
     cy.get('input#firstName').type('Raiziell')
     cy.get('input#lastName').type('Lima')
     cy.get('input#email').type('raiziellz@')
     cy.get('textarea#open-text-area').type('Estou utilizando um email inválido')
-    //cy.get('button[type="submit"]').click()
+
     cy.contains('button', 'enviar', { matchCase: false }).click()
 
     cy.get('.error').should('be.visible')
+    cy.tick(4000)
+    cy.get('.error').should('not.be.visible')
     
   })
   
@@ -52,6 +63,7 @@ describe('Central de Atendimento ao Cliente', () => {
 
   it('Ex 4 - Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
 
+    cy.clock()
     cy.get('input#firstName').type('Raiziell')
     cy.get('input#lastName').type('Lima')
     cy.get('input#email').type('raiziellz@gmail.com')
@@ -62,7 +74,8 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.contains('button', 'enviar', { matchCase: false }).click()
 
     cy.get('.error').should('be.visible')
-    
+    cy.tick(4000)
+    cy.get('.error').should('not.be.visible')
   })
 
   it('Ex 5 - Preenche e limpa os campos nome, sobrenome, email e telefone', () => {
@@ -80,17 +93,20 @@ describe('Central de Atendimento ao Cliente', () => {
   })
 
   it('Ex 6 - Exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-
+    cy.clock()
     cy.contains('button', 'enviar', { matchCase: false }).click()
     //cy.get('button[type="submit"]').click()
     cy.get('.error').should('be.visible')
-    
+    cy.tick(4000)
+    cy.get('.error').should('not.be.visible')
   })
 
   it('Ex 7 - Envia o formuário com sucesso usando um comando customizado', () => {
-
+    cy.clock()
     cy.fillMandatoryFieldsAndSubmit('Rai', 'F L', 'raizi@gmail.com', 'Algum texto')
     cy.get('.success').should('be.visible')
+    cy.tick(4000)
+    cy.get('.success').should('not.be.visible')
     
   })
 
@@ -136,6 +152,40 @@ describe('Central de Atendimento ao Cliente', () => {
 
   it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
     cy.get('a[href="privacy.html"]').invoke('removeAttr', 'target').click()
+  })
+
+
+  it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', ()=>{
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible')
+  })
+
+  it('preenche a area de texto usando o comando invoke', ()=>{
+    cy.get('textarea#open-text-area')
+      .invoke('val','Estou com problemas para abrir o Cypress')
+      .should('have.value', 'Estou com problemas para abrir o Cypress')
+  })
+
+  it.only('Encontra o gato', ()=>{
+    cy.get('#cat')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+
+    cy.log('Testando github actions.')
   })
 
 })
